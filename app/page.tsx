@@ -6,9 +6,9 @@ import { useRef } from "react";
 export default function Home() {
   const heroRef = useRef<HTMLElement | null>(null);
   return (
-    <>
+    <section className="h-full">
       <Hero ref={heroRef}/>
       {/* <Deco/> */}
-    </>
+    </section>
   );
 }
