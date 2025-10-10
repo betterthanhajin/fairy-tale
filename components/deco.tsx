@@ -4,12 +4,12 @@ export const Deco = () => {
     return (
         <section className="flex justify-center">
           <div className="absolute bottom-0 left-0 right-0 overflow-hidden z-10">
-                <div className="circleAnimation transition-delay flex">
+                <div className="transition-delay flex">
                     {/* 원본 */}
                     {Array.from({ length: 1 }).map((_, index) => (
                         <div 
                             key={`original-${index}`}
-                            className="w-24 h-24 rounded-full bg-blue-400 flex-shrink-0"
+                            className="w-52 h-52 rounded-full bg-blue-400 flex-shrink-0"
                         />
                     ))}
                     
