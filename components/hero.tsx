@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import { forwardRef, useEffect, useRef, useState, useMemo } from "react";
-import { Deco } from "./deco";
 
 // 여러 ref를 안전하게 합치는 유틸
 function setRefs<T>(...refs: (React.Ref<T> | undefined)[]) {
@@ -76,7 +75,7 @@ export const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
   return (
     <section
       ref={setRefs(ref, sectionRef)}
-      className={`relative bg-gradient-to-br from-[#EEAECA] via-[#C0B5DA] to-[#94BBE9] h-screen overflow-hidden ${className ?? ""}`}
+      className={`relative bg-gradient-to-br from-[#EEAECA] via-[#C0B5DA] to-[#94BBE9] h-screen ${className ?? ""}`}
     >
       <div className="absolute p-4 text-white font-extrabold text-3xl z-10 drop-shadow">
         <h3 className="text-sm">Product Engineer</h3>
@@ -84,7 +83,7 @@ export const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
         <h1>HAJIN</h1>
       </div>
 
-      <div ref={scrollContainerRef} className="w-full h-full overflow-y-scroll">
+      <div ref={scrollContainerRef} className="w-full h-full overflow-y-scroll overflow-x-hidden scrollbar-none">
         <div className="relative h-[400vh]">
           <div className="sticky top-0 w-full h-screen flex items-center justify-center">
             {images.map((src, index) => {
@@ -113,7 +112,7 @@ export const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
           </div>
 
           {/* 장식 요소 */}
-          <Deco />
+          {/* <Deco /> */}
         </div>
       </div>
     </section>
