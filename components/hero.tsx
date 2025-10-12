@@ -25,7 +25,12 @@ export const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const images = useMemo(
-    () => ["/image/main01.png", "/image/main02.png", "/image/main03.png", "/image/main04.png"],
+    () => [
+       { src: "/image/main01.png", title:`안녕하세요`, desc:"개발에 참여하는 모든" }, 
+       { src: "/image/main02.png", title:"사람들의 입장에서" , desc:"공감하고" }, 
+       { src: "/image/main03.png", title:"항상 팀원들과", desc:"회사를 위하고자하는" }, 
+       { src: "/image/main04.png", title:"개발 5년차 엔지니어" , desc:"이하진입니다." }
+    ],
     []
   );
 
@@ -86,19 +91,23 @@ export const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
       <div ref={scrollContainerRef} className="w-full h-full overflow-y-scroll overflow-x-hidden scrollbar-none">
         <div className="relative h-[400vh]">
           <div className="sticky top-0 w-full h-screen flex items-center justify-center">
-            {images.map((src, index) => {
+            {images.map((image, index) => {
               const isActive = index === currentIndex; const isPrev = index === currentIndex - 1; 
               const scale = isActive ? 1 + scrollProgress * 0.1 : 1; 
               const prevScale = isPrev ? 1 - scrollProgress * 0.1 : 1;
 
               return (
+                <div key={image.src}>
+                <div className={`p-1 absolute top-[20%] left-[30%] z-10 bg-gradient-to-br from-[#EEAECA] via-[#C0B5DA] to-[#94BBE9] shadow-md rounded-md will-change-transform ${isActive ? 'opacity-100' : 'opacity-0'}`}>
+                    <h2 className="text-gray-600 font-extrabold lg:text-4xl text-xl">{image.title}<br/>{image.desc}</h2>
+                </div>
                 <div
-                  key={src}
+                  key={image.src}
                   className={`absolute inset-0 flex items-center justify-center will-change-transform ${isActive ? 'opacity-100' : 'opacity-0'} `}
                   style={{ transform: `scale(${isActive ? scale : isPrev ? prevScale : 1})`, transition: 'transform 0.3s ease-out' }}
                 >
                   <Image
-                    src={src}
+                    src={image.src}
                     alt={`포트폴리오 메인 이미지 ${index + 1}`}
                     fill
                     // 반응형 사이즈 (데스크톱에서 최대 1200px로 렌더)
@@ -107,6 +116,7 @@ export const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
                     className="object-contain"
                   />
                 </div>
+                 </div>
               );
             })}
           </div>
@@ -116,5 +126,6 @@ export const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
         </div>
       </div>
     </section>
+   
   );
 });

@@ -31,15 +31,20 @@ const workData = [
 export const Works = () => {
     return (
         <section className="min-h-screen bg-gradient-to-br from-[#EEAECA] via-[#C0B5DA] to-[#94BBE9]">
-            <div className="flex flex-col lg:flex-row justify-center items-center gap-2">
+            <div className="p-8">
+                <h2 className="lg:text-3xl text-xl text-white">WORKS</h2>
+            </div>
+            <div className="flex flex-col lg:flex-row justify-center items-center gap-8 p-8">
                 
                  {workData.map((work) => (
                     <div 
                         key={work.id}
-                        className="bg-pink-300 w-72 h-72 rounded-md p-2 mt-8 text-black"
+                        className="bg-pink-300/50 w-full h-72 rounded-md p-2 mt-8 text-white font-medium"
                     >
                     {work.title}
-                    {work.desc}
+                        <div>
+                            {work.desc}
+                        </div>
                     </div>
                 ))}
             </div>
