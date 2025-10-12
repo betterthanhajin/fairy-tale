@@ -30,9 +30,9 @@ const workData = [
 
 export const Works = () => {
     return (
-        <section className="min-h-screen bg-gradient-to-br from-[#EEAECA] via-[#C0B5DA] to-[#94BBE9]">
+        <section id="section-1" className="min-h-screen bg-gradient-to-br from-[#EEAECA] via-[#C0B5DA] to-[#94BBE9]">
             <div className="p-8">
-                <h2 className="lg:text-3xl text-xl text-white">WORKS</h2>
+                <h2 className="lg:text-3xl text-xl text-white font-extrabold">WORKS</h2>
             </div>
             <div className="flex flex-col lg:flex-row justify-center items-center gap-8 p-8">
                 

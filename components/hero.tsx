@@ -80,6 +80,7 @@ export const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
   return (
     <section
       ref={setRefs(ref, sectionRef)}
+      id="section-0"
       className={`relative bg-gradient-to-br from-[#EEAECA] via-[#C0B5DA] to-[#94BBE9] h-screen ${className ?? ""}`}
     >
       <div className="absolute p-4 text-white font-extrabold text-3xl z-10 drop-shadow">
