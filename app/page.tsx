@@ -1,9 +1,9 @@
 "use client";
-import { Deco } from "@/components/deco";
+import { About } from "@/components/about";
 import Header from "@/components/header";
 import {Hero} from "@/components/hero";
 import { Works } from "@/components/works";
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 
 export default function Home() {
   const heroRef = useRef<HTMLElement | null>(null);
@@ -14,6 +14,7 @@ export default function Home() {
       <Header/>
       <Hero ref={heroRef}/>
       <Works/>
+      <About/>
     </section>
     </>
   );
