@@ -30,8 +30,8 @@ const workData = [
 
 export const Works = () => {
     return (
-        <section className="h-full bg-gradient-to-br from-[#EEAECA] via-[#C0B5DA] to-[#94BBE9]">
-            <div className="flex justify-center gap-2">
+        <section className="min-h-screen bg-gradient-to-br from-[#EEAECA] via-[#C0B5DA] to-[#94BBE9]">
+            <div className="flex flex-col lg:flex-row justify-center items-center gap-2">
                 
                  {workData.map((work) => (
                     <div 
@@ -45,14 +45,14 @@ export const Works = () => {
             </div>
             <div className="flex justify-center gap-2">
                 {/* 원본 */}
-                {Array.from({ length: 4 }).map((_, index) => (
+                {/* {Array.from({ length: 4 }).map((_, index) => (
                     <div 
                         key={`original-${index}`}
                         className="bg-pink-300 w-72 h-72 rounded-md p-2 mt-8 text-black"
                     >
                     Works1
                     </div>
-                ))}
+                ))} */}
             </div>
       </section>
     )
