@@ -7,15 +7,18 @@ import { useRef } from "react";
 
 export default function Home() {
   const heroRef = useRef<HTMLElement | null>(null);
+  const outerScrollRef = useRef<HTMLElement | null>(null); // 외부 스크롤 컨테이너
 
   return (
-    <>
-    <section className="h-full overflow-y-scroll scrollbar-none">
+    <section
+      ref={outerScrollRef}
+      className="h-full overflow-y-scroll scrollbar-none"  // ← 이게 외부 스크롤러
+    >
       <Header/>
       <Hero ref={heroRef}/>
-      <Works/>
+      {/* 외부 스크롤러를 Works에 넘겨줌 */}
+      <Works scrollRootRef={outerScrollRef}/>
       <About/>
     </section>
-    </>
   );
 }
