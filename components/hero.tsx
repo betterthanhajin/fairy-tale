@@ -77,6 +77,13 @@ export const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
     };
   }, [images.length]);
 
+    const isLastActive = currentIndex === images.length - 1;
+    const baseScale = 1 + scrollProgress * 0.8;
+    const baseScale2 = 10 + scrollProgress * 0.8;
+    const circleTransform = isLastActive
+    ? `translate(-300px, -700px) rotate(-30deg) scale(${baseScale})`
+    : `scale(${currentIndex % 2 ? baseScale2 : baseScale})`;
+
   return (
     <section
       ref={setRefs(ref, sectionRef)}
@@ -93,33 +100,41 @@ export const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
         <div className="relative h-[400vh]">
           <div className="sticky top-0 w-full h-screen flex items-center justify-center">
             {images.map((image, index) => {
-              const isActive = index === currentIndex; const isPrev = index === currentIndex - 1; 
+              const isActive = index === currentIndex;
+              const isPrev = index === currentIndex - 1; 
               const scale = isActive ? 1 + scrollProgress * 0.1 : 1; 
               const prevScale = isPrev ? 1 - scrollProgress * 0.1 : 1;
-
+              const last = index === images.length - 1;
+            
               return (
                 <div key={image.src}>
-                <div className={`p-1 absolute top-[20%] left-[30%] z-10 bg-gradient-to-br from-[#EEAECA] via-[#C0B5DA] to-[#94BBE9] shadow-md rounded-md will-change-transform ${isActive ? 'opacity-100' : 'opacity-0'}`}>
-                    <h2 className="text-gray-600 font-extrabold lg:text-4xl text-xl">{image.title}<br/>{image.desc}</h2>
-                </div>
-                <div
-                  key={image.src}
-                  className={`absolute inset-0 flex items-center justify-center will-change-transform ${isActive ? 'opacity-100' : 'opacity-0'} `}
-                  style={{ transform: `scale(${isActive ? scale : isPrev ? prevScale : 1})`, transition: 'transform 0.3s ease-out' }}
-                >
-                  <Image
-                    src={image.src}
-                    alt={`포트폴리오 메인 이미지 ${index + 1}`}
-                    fill
-                    // 반응형 사이즈 (데스크톱에서 최대 1200px로 렌더)
-                    sizes="(min-width: 1280px) 1200px, 100vw"
-                    priority={index === 0}
-                    className="object-contain"
-                  />
-                </div>
+                    <div className={`p-1 absolute top-[20%] left-[30%] z-40 bg-gradient-to-br from-[#EEAECA] via-[#C0B5DA] to-[#94BBE9] shadow-md rounded-md will-change-transform ${isActive ? 'opacity-100' : 'opacity-0'}`}>
+                        <h2 className="text-gray-600 font-extrabold lg:text-4xl text-xl">{image.title}<br/>{image.desc}</h2>
+                    </div>
+                    <div
+                    key={image.src}
+                    className={`absolute inset-0 z-20 flex items-center justify-center will-change-transform ${isActive ? 'opacity-100' : 'opacity-0'} `}
+                    style={{ transform: `scale(${isActive ? scale : isPrev ? prevScale : 1})`, transition: 'transform 0.3s ease-out' }}
+                    >
+                    <Image
+                        src={image.src}
+                        alt={`포트폴리오 메인 이미지 ${index + 1}`}
+                        fill
+                        // 반응형 사이즈 (데스크톱에서 최대 1200px로 렌더)
+                        sizes="(min-width: 1280px) 1200px, 100vw"
+                        priority={index === 0}
+                        className="object-contain"
+                    />
+                    </div>           
                  </div>
               );
             })}
+            <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+              <div
+                className="w-80 h-80 bg-pink-300/60 rounded-full transition-transform duration-300 will-change-transform"
+                style={{ transform: circleTransform }}
+              />
+            </div>
           </div>
 
           {/* 장식 요소 */}
