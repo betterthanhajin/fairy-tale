@@ -85,7 +85,7 @@ export const Works = ({ scrollRootRef }: WorksProps) => {
         {workData.map((work, i) => (
           <div
             key={work.id}
-            className="bg-pink-300/50 w-full h-72 rounded-md p-4 mt-8 text-white font-medium
+            className="bg-white/50 text-black w-full h-72 rounded-md p-4 mt-8 font-medium
                        transition-all duration-700 will-change-transform"
             style={{
               visibility: isActive ? "visible" : "hidden",
@@ -103,7 +103,7 @@ export const Works = ({ scrollRootRef }: WorksProps) => {
         {workData2.map((work, i) => (
           <div
             key={work.id}
-            className="bg-pink-300/50 w-full h-72 rounded-md p-4 mt-2 text-white font-medium
+            className="bg-pink-400/80 w-full h-72 rounded-md p-4 mt-2 text-white font-medium
                        transition-all duration-700 will-change-transform"
             style={{
               visibility: isActive ? "visible" : "hidden",
