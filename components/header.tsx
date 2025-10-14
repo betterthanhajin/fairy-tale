@@ -14,7 +14,7 @@ export const Header = () => {
 
   return (
     <nav className="p-4 backdrop-filter fixed left-0 right-0 top-0 z-[100]">
-      <ul className="text-right font-bold text-white cursor-pointer nav-bar">
+      <ul className="text-right font-bold text-white cursor-pointer nav-bar lg:text-2xl text-lg">
         <li onClick={() => navHandler(0)}>
           Home
         </li>
