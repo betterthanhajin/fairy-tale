@@ -18,7 +18,7 @@ export default function Home() {
       <Hero ref={heroRef}/>
       {/* 외부 스크롤러를 Works에 넘겨줌 */}
       <Works scrollRootRef={outerScrollRef}/>
-      <About/>
+      {/* <About/> */}
     </section>
   );
 }
