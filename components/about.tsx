@@ -141,7 +141,7 @@ export const About = ({ scrollRootRef }: WorksProps) => {
             <div className="mt-12">
                 <Image style={{
                     objectFit:"cover"
-                }} src={work.imageUrl || ''} alt="상세이미지" width={500} height={400}></Image>
+                }} src={work.imageUrl || ""} alt="상세이미지" width={500} height={400}></Image>
             </div>
           </div>
         ))}
