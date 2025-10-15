@@ -7,17 +7,11 @@ import Image from "next/image";
 const workData2 = [
 
     {
-        id:0,
-        title:"",
-        desc:"",
+        id:1,
+        title:"엔지니어 이하진",
+        desc:"'코드 한 줄이 사용자의 하루를 바꿀 수 있다'고 믿는 개발자 이하진입니다. 복잡한 문제를 심플하게 해결하는 것을 좋아하며, 5초 걸리던 로딩을 1.5초로 줄이는 것에서 큰 성취감을 느낍니다. 사용자가 '어? 이거 편하네'라고 느끼는 순간을 만들기 위해 고민합니다. 팀과 함께 성장하는 것을 중요하게 생각하며, 팀 전체의 생산성을 높이기 위해 노력합니다. 새로운 기술을 두려워하지 않고, 여러 기술을 넘나들며 최적의 솔루션을 찾아갑니다.",
         bgColor:"#C0B5DA",
         imageUrl:"/image/works/me.png"
-    },
-    {
-        id:1,
-        title:"개발자 이하진",
-        desc:"'코드 한 줄이 사용자의 하루를 바꿀 수 있다'고 믿는 개발자 이하진입니다. 복잡한 문제를 심플하게 해결하는 것을 좋아하며, 5초 걸리던 로딩을 1.5초로 줄이는 것에서 큰 성취감을 느낍니다. 사용자가 '어? 이거 편하네'라고 느끼는 순간을 만들기 위해 고민합니다. 팀과 함께 성장하는 것을 중요하게 생각하며, 팀 전체의 생산성을 높이기 위해 노력합니다. 새로운 기술을 두려워하지 않고, 여러 기술을 넘나들며 최적의 솔루션을 찾아갑니다.",
-        bgColor:"#C0B5DA"
     },
 
 
@@ -118,16 +112,16 @@ export const About = ({ scrollRootRef }: WorksProps) => {
       className="relative z-10 p-12 bg-gradient-to-br from-[#EEAECA] via-[#C0B5DA] to-[#94BBE9]"
     >
        <h1 className="text-white text-3xl font-extrabold mb-3">ABOUT ME</h1>
-       <div className="flex lg:flex-row flex-col justify-start lg:h-[500px]"
+       <div className="flex lg:flex-row flex-col justify-start"
        >
         {workData2.map((work, i) => (
           <div
             key={work.id}
             id={`work-${work.id}`}
-            className={`p-4 text-white font-medium
+            className={`p-4 text-white font-medium w-full h-full
                        transition-all duration-700 will-change-transform shadow-md`}
             style={{
-              backgroundColor:`${work.bgColor}`,
+              backgroundColor:``,
               visibility: isActive ? "visible" : "hidden",
               opacity: isActive ? 1 : 0,
               transform: isActive ? "none" : introTransform,
@@ -138,10 +132,9 @@ export const About = ({ scrollRootRef }: WorksProps) => {
             {work.desc.split(",").map((desc,i) => (
             <div key={desc} className="mt-2 text-sm">{desc}</div>
             ))}
-            <div className="mt-12">
+            <div className="mt-8">
                 <Image style={{
-                    objectFit:"cover"
-                }} src={work.imageUrl || ""} alt="상세이미지" width={500} height={400}></Image>
+                }} src={work.imageUrl || ""} alt="상세이미지" width={500} height={200}></Image>
             </div>
           </div>
         ))}
