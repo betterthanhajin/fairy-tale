@@ -246,11 +246,11 @@ const trees = [
        
         ))}
       </div>
-      <div className="absolute top-0 inset-0 z-10 pointer-events-none">
+      {/* <div className="absolute top-0 inset-0 z-10 pointer-events-none">
         {trees.map((t, i) => (
           <TreeSprout key={i} {...t} />
         ))}
-      </div>
+      </div> */}
 
     </section>
   );
