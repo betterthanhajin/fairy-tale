@@ -1,7 +1,8 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRevealOnEnter } from "@/lib/hooks/useRevealOnEnter";
 import Image from "next/image";
+import TreeSprout from "@/components/tree-sprount";
 
 const workData2 = [
     {
@@ -39,10 +40,22 @@ const workData2 = [
 
 const bgColorArr = [
   
-  ["#2ab1efff","#f98220ff"],
-  ["#d362ecff","#47e0e8ff"],
-  ["#e67060ff","#8651e9ff"]
+  ["#d8c5b3","#db8640ff"],
+  ["#b3b8d8ff","#9297d1ff"],
+  ["#d695ffff","#8651e9ff"]
 ]
+
+
+// 컴포넌트 상단 부분에 추가
+type BushDot = {
+  id: number;
+  x: number;   // 0~100 vw 기준 %
+  y: number;   // 0~100 vh 기준 %
+  size: number; // px
+  hue: number; // 90~150 (초록 톤)
+  delay: number; // 초
+};
+
 
 type WorksProps = {
   scrollRootRef?: React.RefObject<HTMLElement | null>; // 외부 스크롤러
@@ -50,6 +63,51 @@ type WorksProps = {
 
 
 export const Works = ({ scrollRootRef }: WorksProps) => {
+
+const [bush, setBush] = useState<BushDot[]>([]);
+const nextId = useRef(0);
+
+// 원 하나 생성
+const makeDot = (): BushDot => {
+  // 중앙에만 몰리지 않게, 약간 하단·좌우로 분산
+  const y = 45 + Math.random() * 40; // 45~85%
+  const x = 10 + Math.random() * 80; // 10~90%
+  const size = 24 + Math.random() * 120; // 24~144px
+  const opacity = 0.35 + Math.random() * 0.5;
+  const blur = Math.random() < 0.4 ? Math.random() * 6 : 0;
+  const hue = 100 + Math.random() * 40; // 초록 계열
+  const delay = Math.random() * 0.4; // 살짝 시차
+
+  return {
+    id: nextId.current++,
+    x,
+    y,
+    size,
+    hue,
+    delay,
+  };
+};
+
+// 일정 간격으로 하나씩 추가 (퍼포먼스 위해 최대치 유지)
+useEffect(() => {
+  const MAX = 120;       // 너무 많아지면 repaint 부담 → capped
+  const INTERVAL = 250;  // 0.25초마다 1개 추가
+
+  const t = setInterval(() => {
+    setBush(prev => {
+      if (prev.length >= MAX) {
+        // 오래된 점부터 순환 교체
+        const [, ...rest] = prev;
+        return [...rest, makeDot()];
+      }
+      return [...prev, makeDot()];
+    });
+  }, INTERVAL);
+
+  return () => clearInterval(t);
+}, []);
+
+
   const sectionRef = useRef<HTMLElement | null>(null);
 
   // 외부 스크롤 컨테이너가 있다면 root로 지정, 없으면 viewport
@@ -90,7 +148,7 @@ export const Works = ({ scrollRootRef }: WorksProps) => {
 
     const pageChangeFunc = (idx: number) => {
       const [c1, c2] = bgColorArr[idx % bgColorArr.length];
-      document.body.style.background = `linear-gradient(120deg,${c1}, ${c2})`;
+      document.body.style.background = `#f3f3f3`;
     };
 
     const onScrollEvent = () => {
@@ -132,6 +190,24 @@ export const Works = ({ scrollRootRef }: WorksProps) => {
   }, [scrollRootRef?.current]);
 
 
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+       const baseScale = 1 + scrollProgress * 0.8;
+    const baseScale2 = 10 + scrollProgress * 0.8;
+
+      const circleTransform = 
+   
+   `scale(${currentIndex % 2 ? baseScale2 : baseScale})`;
+
+const trees = [
+  { left: "38%", top: "66%", delay: 0.0, scale: 0.9, hue: 118 },
+  { left: "55%", top: "63%", delay: 0.25, scale: 1.05, hue: 124 },
+  { left: "46%", top: "69%", delay: 0.5, scale: 0.8, hue: 112 },
+  { left: "62%", top: "67%", delay: 0.75, scale: 1.1, hue: 130 },
+];
+
+
   return (
     <section
       ref={sectionRef}
@@ -141,13 +217,13 @@ export const Works = ({ scrollRootRef }: WorksProps) => {
        <div className="absolute top-0 left-[50%] flex flex-col justify-center"
        style={{transform:"translateX(-50%);"}}
        >
-        <h2 className="text-white text-4xl font-extrabold">WORKS</h2>
+        <h2 className="text-[#665444] text-4xl font-extrabold">WORKS</h2>
         {workData2.map((work, i) => (
        
           <div
             key={work.id}
             id={`work-${work.id}`}
-            className={`lg:w-[500px] lg:h-[600px] w-[300px] h-[400px] p-4 text-white font-bold shadow-sm rounded-lg mt-3
+            className={`lg:w-[500px] lg:h-[600px] w-[300px] h-[400px] p-4 text-[#665444] font-bold shadow-sm rounded-lg mt-3
                        transition-all duration-700 will-change-transform`}
             style={{
               backgroundColor:``,
@@ -170,6 +246,12 @@ export const Works = ({ scrollRootRef }: WorksProps) => {
        
         ))}
       </div>
+      <div className="absolute top-0 inset-0 z-10 pointer-events-none">
+        {trees.map((t, i) => (
+          <TreeSprout key={i} {...t} />
+        ))}
+      </div>
+
     </section>
   );
 };

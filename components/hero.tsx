@@ -88,7 +88,7 @@ export const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
     <section
       ref={setRefs(ref, sectionRef)}
       id="section-0"
-      className={`relative bg-gradient-to-br from-[#EEAECA] via-[#C0B5DA] to-[#94BBE9] h-screen ${className ?? ""}`}
+      className={`relative bg-[#d8c5b3] h-screen ${className ?? ""}`}
     >
       <div className="absolute p-4 text-white font-extrabold text-3xl z-10 drop-shadow">
         <h3 className="text-sm">Product Engineer</h3>
@@ -108,9 +108,9 @@ export const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
             
               return (
                 <div key={image.src}>
-                    {/* <div className={`p-1 absolute top-[20%] left-[30%] z-40 bg-transparent rounded-md will-change-transform ${isActive ? 'opacity-100' : 'opacity-0'}`}>
-                        <h2 className="text-white font-extrabold lg:text-4xl text-xl p-2">{image.title}<br/>{image.desc}</h2>
-                    </div> */}
+                    <div className={`p-1 absolute top-[20%] left-[30%] z-40 bg-white rounded-2xl will-change-transform ${isActive ? 'opacity-100' : 'opacity-0'}`}>
+                        <h2 className="text-[#927650] font-extrabold lg:text-4xl text-xl p-2">{image.title}<br/>{image.desc}</h2>
+                    </div>
                     <div
                     key={image.src}
                     className={`absolute inset-0 z-20 flex items-center justify-center will-change-transform ${isActive ? 'opacity-100' : 'opacity-0'} `}
@@ -124,6 +124,9 @@ export const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
                         sizes="(min-width: 1280px) 1200px, 100vw"
                         priority={index === 0}
                         className="object-contain"
+                        style={{
+                          filter: "contrast(0.9)"
+                        }}
                     />
                     </div>           
                  </div>
@@ -131,7 +134,7 @@ export const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
             })}
             <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
               <div
-                className="w-80 h-80 bg-gradient-to-tr from-[#EEAECA] via-[#C0B5DA] to-[#94BBE9] rounded-full transition-transform duration-300 will-change-transform"
+                className="w-80 h-80 bg-[#3a902f]/90 rounded-full transition-transform duration-300 will-change-transform"
                 style={{ transform: circleTransform }}
               />
             </div>
