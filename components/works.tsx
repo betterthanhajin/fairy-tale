@@ -31,7 +31,7 @@ const workData2 = [
     {
         id:7,
         title:"04. CGV Her 프로젝트",
-        desc:"영화 'Her' 이벤트를 위해 개발된 사용자와 음성 대화를 나누는 웹 애플리케이션, 프로젝트 전체 아키텍처 설계 및 핵심 기능 구현을 담당, 실시간 음성 스트리밍 구현, iOS Safari 호환성 구현, 대화 컨텍스트 시스템(장기 기억) 구현,  VAD 음성 감지 최적화",
+        desc:"영화 'Her' 이벤트를 위해 개발된 사용자와 음성 대화를 나누는 웹 애플리케이션, 프로젝트 전체 아키텍처 설계 및 핵심 기능 구현을 담당, 실시간 음성 스트리밍 구현, iOS Safari 호환성 구현, 대화 컨텍스트 시스템(장기 기억) 구현",
         bgColor:"#fff1d3ff",
         imageUrl:"/image/works/her.png"
     }
@@ -158,12 +158,13 @@ export const Works = ({ scrollRootRef }: WorksProps) => {
             }}
           >
             
-            <div className="text-lg font-bold">{work.title}</div>
+            <div className="lg:text-lg text-md font-bold">{work.title}</div>
             {work.desc.split(",").map((desc,i) => (
-            <div key={desc} className="mt-2 text-sm">{desc}</div>
+            <div key={desc} className="mt-2 lg:text-sm text-xs">{desc}</div>
             ))}
-            <div className="mt-12">
-              <Image src={work.imageUrl || ""} alt="상세이미지" width={450} height={400}></Image>
+            <div className="lg:mt-12 mt-2">
+              <Image className="lg:block hidden" src={work.imageUrl || ""} alt="상세이미지" width={450} height={400}></Image>
+              <Image className="block lg:hidden" src={work.imageUrl || ""} alt="상세이미지" width={300} height={200}></Image>
             </div>
           </div>
        
