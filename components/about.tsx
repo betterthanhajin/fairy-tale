@@ -1,21 +1,26 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { useRevealOnEnter } from "@/lib/hooks/useRevealOnEnter";
+import Image from "next/image";
+
 
 const workData2 = [
+
     {
         id:0,
+        title:"",
+        desc:"",
+        bgColor:"#a8cdab",
+        imageUrl:"/image/works/me.png"
+    },
+    {
+        id:1,
         title:"개발자 이하진",
         desc:"'코드 한 줄이 사용자의 하루를 바꿀 수 있다'고 믿는 개발자 이하진입니다. 복잡한 문제를 심플하게 해결하는 것을 좋아하며, 5초 걸리던 로딩을 1.5초로 줄이는 것에서 큰 성취감을 느낍니다. 사용자가 '어? 이거 편하네'라고 느끼는 순간을 만들기 위해 고민합니다. 팀과 함께 성장하는 것을 중요하게 생각하며, 팀 전체의 생산성을 높이기 위해 노력합니다. 새로운 기술을 두려워하지 않고, 여러 기술을 넘나들며 최적의 솔루션을 찾아갑니다.",
         bgColor:"#a8cdab"
     },
 
-    {
-        id:1,
-        title:"개인정보 탐지·마스킹 시스템",
-        desc:"대용량 Excel 내 개인정보를 자동 탐지 마스킹해야 하며 외부 반출을 최소화, 헤더 식별 및 검증 | 선택 열 기반 마스킹 | 엑셀 재생성까지 파이프라인 구축, 수작업 대비 반복 업무 자동화, 마스킹 결과의 일관성을 확보, 대용량 파일에서도 안정 동작",
-        bgColor:"#d187e2ff"
-    },
+
 ]
 
 const bgColorArr = [
@@ -133,6 +138,11 @@ export const About = ({ scrollRootRef }: WorksProps) => {
             {work.desc.split(",").map((desc,i) => (
             <div key={desc} className="mt-2 text-sm">{desc}</div>
             ))}
+            <div className="mt-12">
+                <Image style={{
+                    objectFit:"cover"
+                }} src={work.imageUrl || ''} alt="상세이미지" width={500} height={400}></Image>
+            </div>
           </div>
         ))}
       </div>
