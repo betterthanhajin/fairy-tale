@@ -136,7 +136,7 @@ export const Works = ({ scrollRootRef }: WorksProps) => {
     <section
       ref={sectionRef}
       id="section-1"
-      className="relative z-10 lg:h-[2400px] h-[1600px]"
+      className="relative z-10 lg:h-[2400px] h-[1800px]"
     >
        <div className="absolute top-0 left-[50%] flex flex-col justify-center"
        style={{transform:"translateX(-50%);"}}
@@ -147,10 +147,10 @@ export const Works = ({ scrollRootRef }: WorksProps) => {
           <div
             key={work.id}
             id={`work-${work.id}`}
-            className={`lg:w-[500px] lg:h-[600px] w-[300px] h-[400px] p-4 text-gray-600 font-bold
+            className={`lg:w-[500px] lg:h-[600px] w-[300px] h-[400px] p-4 text-white font-bold shadow-sm rounded-lg mt-3
                        transition-all duration-700 will-change-transform`}
             style={{
-              backgroundColor:`${work.bgColor}`,
+              backgroundColor:``,
               visibility: isActive ? "visible" : "hidden",
               opacity: isActive ? 1 : 0,
               transform: isActive ? "none" : introTransform,

@@ -125,7 +125,7 @@ export const About = ({ scrollRootRef }: WorksProps) => {
             key={work.id}
             id={`work-${work.id}`}
             className={`p-4 text-white font-medium
-                       transition-all duration-700 will-change-transform`}
+                       transition-all duration-700 will-change-transform shadow-md`}
             style={{
               backgroundColor:`${work.bgColor}`,
               visibility: isActive ? "visible" : "hidden",
