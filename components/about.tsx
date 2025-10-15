@@ -68,11 +68,6 @@ export const About = ({ scrollRootRef }: WorksProps) => {
       return rEl.top - rSc.top + (scroller as HTMLElement).scrollTop;
     };
 
-    const pageChangeFunc = (idx: number) => {
-      const color = bgColorArr[idx % bgColorArr.length];
-      document.body.style.background = color;
-    };
-
     const onScrollEvent = () => {
       const workSection = Array.from(
         document.querySelectorAll<HTMLElement>('[id^="work-"]') // ✅ 수정된 selector
@@ -92,7 +87,6 @@ export const About = ({ scrollRootRef }: WorksProps) => {
         if (scroll > start && scroll < end) {
           if (pageNumRef.current !== i) {
             pageNumRef.current = i;
-            pageChangeFunc(i);
           }
           break;
         }
@@ -116,7 +110,7 @@ export const About = ({ scrollRootRef }: WorksProps) => {
     <section
       ref={sectionRef}
       id="section-2"
-      className="relative z-10 p-12"
+      className="relative z-10 p-12 bg-gradient-to-br from-[#EEAECA] via-[#C0B5DA] to-[#94BBE9]"
     >
        <h1 className="text-white text-3xl font-extrabold mb-3">ABOUT ME</h1>
        <div className="flex lg:flex-row flex-col justify-center lg:h-[500px]"
