@@ -130,9 +130,9 @@ export const Works = ({ scrollRootRef }: WorksProps) => {
     <section
       ref={sectionRef}
       id="section-1"
-      className="relative z-10 min-h-screen"
+      className="relative z-10 lg:h-[2400px] h-[1600px]"
     >
-       <div className="min-h-screen absolute top-0 left-[50%] flex flex-col justify-center items-center overflow-y-scroll  scrollbar-none"
+       <div className="absolute top-0 left-[50%] flex flex-col justify-center"
        style={{transform:"translateX(-50%);"}}
        >
         {workData2.map((work, i) => (

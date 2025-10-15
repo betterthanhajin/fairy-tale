@@ -1,64 +1,148 @@
 "use client";
+import { useEffect, useRef } from "react";
+import { useRevealOnEnter } from "@/lib/hooks/useRevealOnEnter";
 
-
-const workData = [
+const workData2 = [
     {
         id:0,
-        title:"AI 챗봇 라미챗 QR코드 공유기능",
-        desc:"afadsfdasfsadfdsa"
+        title:"개발자 이하진",
+        desc:"'코드 한 줄이 사용자의 하루를 바꿀 수 있다'고 믿는 개발자 이하진입니다. 복잡한 문제를 심플하게 해결하는 것을 좋아하며, 5초 걸리던 로딩을 1.5초로 줄이는 것에서 큰 성취감을 느낍니다. 사용자가 '어? 이거 편하네'라고 느끼는 순간을 만들기 위해 고민합니다. 팀과 함께 성장하는 것을 중요하게 생각하며, 팀 전체의 생산성을 높이기 위해 노력합니다. 새로운 기술을 두려워하지 않고, 여러 기술을 넘나들며 최적의 솔루션을 찾아갑니다.",
+        bgColor:"#a8cdab"
     },
 
     {
         id:1,
-        title:"AI 챗봇 라미챗 대시보드 개발",
-        desc:"afadsfdasfsadfdsa"
+        title:"개인정보 탐지·마스킹 시스템",
+        desc:"대용량 Excel 내 개인정보를 자동 탐지 마스킹해야 하며 외부 반출을 최소화, 헤더 식별 및 검증 | 선택 열 기반 마스킹 | 엑셀 재생성까지 파이프라인 구축, 수작업 대비 반복 업무 자동화, 마스킹 결과의 일관성을 확보, 대용량 파일에서도 안정 동작",
+        bgColor:"#d187e2ff"
     },
-
-    {
-        id:2,
-        title:"AI 챗봇 라미 테마 기능 개발",
-        desc:"afadsfdasfsadfdsa"
-    },
-    
-    {
-        id:3,
-        title:"AI 이미지 생성 컴포넌트 개발",
-        desc:"afadsfdasfsadfdsa"
-    }
-
 ]
 
-export const About = () => {
-    return (
-        <section id="section-2" className="min-h-screen bg-gradient-to-br from-[#EEAECA] via-[#C0B5DA] to-[#94BBE9]">
-            <div className="p-8">
-                <h2 className="lg:text-3xl text-xl text-white font-extrabold">ABOUT ME</h2>
-            </div>
-            <div className="flex flex-col lg:flex-row justify-center items-center gap-8 p-8">
-                
-                 {workData.map((work) => (
-                    <div 
-                        key={work.id}
-                        className="bg-pink-300/50 w-full h-72 rounded-md p-2 mt-8 text-white font-medium"
-                    >
-                    {work.title}
-                        <div>
-                            {work.desc}
-                        </div>
-                    </div>
-                ))}
-            </div>
-            <div className="flex justify-center gap-2">
-                {/* 원본 */}
-                {/* {Array.from({ length: 4 }).map((_, index) => (
-                    <div 
-                        key={`original-${index}`}
-                        className="bg-pink-300 w-72 h-72 rounded-md p-2 mt-8 text-black"
-                    >
-                    Works1
-                    </div>
-                ))} */}
-            </div>
-      </section>
-    )
+const bgColorArr = [
+  
+    "#149154ff", "#9932beff", "#2290c3ff","#efa020ff"
+  
+]
+
+type WorksProps = {
+  scrollRootRef?: React.RefObject<HTMLElement | null>; // 외부 스크롤러
 };
+
+
+export const About = ({ scrollRootRef }: WorksProps) => {
+  const sectionRef = useRef<HTMLElement | null>(null);
+
+  // 외부 스크롤 컨테이너가 있다면 root로 지정, 없으면 viewport
+  const isActive = useRevealOnEnter(sectionRef, {
+    root: scrollRootRef?.current ?? null,
+    threshold: 0.25, // 25% 노출 시 시작 (원하는 값으로 조정)
+  });
+
+  const introTransform = `translate(-300px, -700px) rotate(-30deg)`;
+
+  useEffect(() => {
+    // 스크롤러 결정: 외부 스크롤 컨테이너가 있으면 그쪽, 없으면 window
+    const scroller: Window | HTMLElement =
+      (scrollRootRef?.current as HTMLElement | null) ?? window;
+
+    const pageNumRef = { current: 0 }; // 리렌더와 무관하게 저장하고 싶다면 useRef로 바꾸세요.
+
+    const getScrollTop = () =>
+      scroller === window
+        ? window.scrollY
+        : (scroller as HTMLElement).scrollTop;
+
+    const getViewportH = () =>
+      scroller === window
+        ? window.innerHeight
+        : (scroller as HTMLElement).clientHeight;
+
+    // 스크롤러 기준 offsetTop 계산
+    const getOffsetTop = (el: HTMLElement) => {
+      if (scroller === window) {
+        const r = el.getBoundingClientRect();
+        return r.top + (window.scrollY ?? 0);
+      }
+      const rEl = el.getBoundingClientRect();
+      const rSc = (scroller as HTMLElement).getBoundingClientRect();
+      return rEl.top - rSc.top + (scroller as HTMLElement).scrollTop;
+    };
+
+    const pageChangeFunc = (idx: number) => {
+      const color = bgColorArr[idx % bgColorArr.length];
+      document.body.style.background = color;
+    };
+
+    const onScrollEvent = () => {
+      const workSection = Array.from(
+        document.querySelectorAll<HTMLElement>('[id^="work-"]') // ✅ 수정된 selector
+      );
+
+      const scroll = getScrollTop();
+      const vh = getViewportH();
+
+      for (let i = 0; i < workSection.length; i++) {
+        const top = getOffsetTop(workSection[i]);
+        const h = workSection[i].offsetHeight;
+
+        // 뷰포트(or 스크롤러) 상단에서 1/3 지점 기준 진입 판정
+        const start = top - vh / 3;
+        const end = start + h;
+
+        if (scroll > start && scroll < end) {
+          if (pageNumRef.current !== i) {
+            pageNumRef.current = i;
+            pageChangeFunc(i);
+          }
+          break;
+        }
+      }
+    };
+
+    // 이벤트 등록 (window와 element 모두 대응)
+    const add = (target: Window | HTMLElement) =>
+      target.addEventListener('scroll', onScrollEvent, { passive: true });
+    const remove = (target: Window | HTMLElement) =>
+      target.removeEventListener('scroll', onScrollEvent);
+
+    add(scroller);
+    onScrollEvent(); // 최초 1회 반영
+
+    return () => remove(scroller);
+  }, [scrollRootRef?.current]);
+
+
+  return (
+    <section
+      ref={sectionRef}
+      id="section-2"
+      className="relative z-10 p-12"
+    >
+       <h1 className="text-white text-3xl font-extrabold mb-3">ABOUT ME</h1>
+       <div className="flex lg:flex-row flex-col justify-center lg:h-[500px]"
+       >
+        {workData2.map((work, i) => (
+          <div
+            key={work.id}
+            id={`work-${work.id}`}
+            className={`p-4 text-white font-medium
+                       transition-all duration-700 will-change-transform`}
+            style={{
+              backgroundColor:`${work.bgColor}`,
+              visibility: isActive ? "visible" : "hidden",
+              opacity: isActive ? 1 : 0,
+              transform: isActive ? "none" : introTransform,
+              transitionDelay: `${i * 100}ms`,
+            }}
+          >
+            <div className="text-lg font-bold">{work.title}</div>
+            {work.desc.split(",").map((desc,i) => (
+            <div key={desc} className="mt-2 text-sm">{desc}</div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
