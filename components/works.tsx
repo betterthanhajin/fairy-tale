@@ -5,29 +5,29 @@ import { useRevealOnEnter } from "@/lib/hooks/useRevealOnEnter";
 const workData2 = [
     {
         id:4,
-        title:"CGV AI 마스킹 시스템",
-        desc:"로컬에서 LLM을 설정하여 엑셀 파일로 들어오는 정보의 특정부분을 마스킹하는 시스템을 개발하였습니다.",
+        title:"AI 챗봇",
+        desc:"기존 URL 공유 방식 대비 QR코드 스캔으로 접근 장벽 제거하여 사용 편의성 개선, 인스타그램/카카오톡 SNS api와 연동하여 챗봇의 편의성을 높임,챗봇의 폰트/애니메이션테마/아이콘을 적용할수 있게 커스텀 기능 강화,에디터 라이브러리를 적용하여 유저와 챗봇의 상호작용을 강화",
         bgColor:"#a8cdab"
     },
 
     {
         id:5,
-        title:"CGV 나이 인식 서비스 개발",
-        desc:"AI를 활용하여 웹캠으로 인식된 사용자의 얼굴 사진 정보를 분석하여 나이를 추정하는 웹 서비스를 개발하였는데 카메라 권한 문제가 있었지만 여러가지 문서를 찾아서 해결했습니다.",
+        title:"개인정보 탐지·마스킹 시스템",
+        desc:"대용량 Excel 내 개인정보를 자동 탐지 마스킹해야 하며 외부 반출을 최소화, 헤더 식별 및 검증 | 선택 열 기반 마스킹 | 엑셀 재생성까지 파이프라인 구축, 수작업 대비 반복 업무 자동화, 마스킹 결과의 일관성을 확보, 대용량 파일에서도 안정 동작",
         bgColor:"#d187e2ff"
     },
 
     {
         id:6,
-        title:"라미 비지니스 웹사이트 개발",
-        desc:"회사의 전반적인 기술과 사업을 소개하는 웹 사이트 개발하였습니다.",
+        title:"투자관리 사내 업무 관리 시스템 개발",
+        desc:"사용자 1000명 규모의 CJ 투자관리 시스템 프론트엔드 개발, 20개 UI 컴포넌트 공통화로 개발 효율성 40% 향상, 페이지 로딩속도 5초에서 1.5초로 최적화, 동적 탭 네비게이션 개발로 사용자 편의성 60% 개선",
         bgColor:"#52b3e7ff"
     },
     
     {
         id:7,
-        title:"온디바이스AI 라미앱 개발",
-        desc:"여러 AI 모델과 대화할수 있는 인터넷이 없는 환경에서도 사용할수 있는 앱의 개발에 참여했습니다.",
+        title:"CGV Her 프로젝트",
+        desc:"영화 'Her' 이벤트를 위해 개발된 사용자와 음성 대화를 나누는 웹 애플리케이션, 프로젝트 전체 아키텍처 설계 및 핵심 기능 구현을 담당, 실시간 음성 스트리밍 구현, iOS Safari 호환성 구현, 대화 컨텍스트 시스템(장기 기억) 구현,  VAD 음성 감지 최적화",
         bgColor:"#e8b547ff"
     }
 ]
@@ -139,7 +139,7 @@ export const Works = ({ scrollRootRef }: WorksProps) => {
           <div
             key={work.id}
             id={`work-${work.id}`}
-            className={`w-[500px] h-[600px] p-4 text-white font-medium
+            className={`lg:w-[500px] lg:h-[600px] w-[300px] h-[400px] p-4 text-white font-medium
                        transition-all duration-700 will-change-transform`}
             style={{
               backgroundColor:`${work.bgColor}`,
@@ -150,7 +150,9 @@ export const Works = ({ scrollRootRef }: WorksProps) => {
             }}
           >
             <div className="text-lg font-bold">{work.title}</div>
-            <div className="mt-2 text-sm">{work.desc}</div>
+            {work.desc.split(",").map((desc,i) => (
+            <div key={desc} className="mt-2 text-sm">{desc}</div>
+            ))}
           </div>
         ))}
       </div>
