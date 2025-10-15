@@ -113,7 +113,7 @@ export const About = ({ scrollRootRef }: WorksProps) => {
       className="relative z-10 p-12 bg-gradient-to-br from-[#EEAECA] via-[#C0B5DA] to-[#94BBE9]"
     >
        <h1 className="text-white text-3xl font-extrabold mb-3">ABOUT ME</h1>
-       <div className="flex lg:flex-row flex-col justify-center lg:h-[500px]"
+       <div className="flex lg:flex-row flex-col justify-start lg:h-[500px]"
        >
         {workData2.map((work, i) => (
           <div

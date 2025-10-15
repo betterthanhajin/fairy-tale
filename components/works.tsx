@@ -5,28 +5,28 @@ import { useRevealOnEnter } from "@/lib/hooks/useRevealOnEnter";
 const workData2 = [
     {
         id:4,
-        title:"AI 챗봇",
+        title:"01. AI 챗봇",
         desc:"기존 URL 공유 방식 대비 QR코드 스캔으로 접근 장벽 제거하여 사용 편의성 개선, 인스타그램/카카오톡 SNS api와 연동하여 챗봇의 편의성을 높임,챗봇의 폰트/애니메이션테마/아이콘을 적용할수 있게 커스텀 기능 강화,에디터 라이브러리를 적용하여 유저와 챗봇의 상호작용을 강화",
         bgColor:"#a8cdab"
     },
 
     {
         id:5,
-        title:"개인정보 탐지·마스킹 시스템",
+        title:"02. 개인정보 탐지·마스킹 시스템",
         desc:"대용량 Excel 내 개인정보를 자동 탐지 마스킹해야 하며 외부 반출을 최소화, 헤더 식별 및 검증 | 선택 열 기반 마스킹 | 엑셀 재생성까지 파이프라인 구축, 수작업 대비 반복 업무 자동화, 마스킹 결과의 일관성을 확보, 대용량 파일에서도 안정 동작",
         bgColor:"#d187e2ff"
     },
 
     {
         id:6,
-        title:"투자관리 사내 업무 관리 시스템 개발",
+        title:"03. 투자관리 사내 업무 관리 시스템 개발",
         desc:"사용자 1000명 규모의 CJ 투자관리 시스템 프론트엔드 개발, 20개 UI 컴포넌트 공통화로 개발 효율성 40% 향상, 페이지 로딩속도 5초에서 1.5초로 최적화, 동적 탭 네비게이션 개발로 사용자 편의성 60% 개선",
         bgColor:"#52b3e7ff"
     },
     
     {
         id:7,
-        title:"CGV Her 프로젝트",
+        title:"04. CGV Her 프로젝트",
         desc:"영화 'Her' 이벤트를 위해 개발된 사용자와 음성 대화를 나누는 웹 애플리케이션, 프로젝트 전체 아키텍처 설계 및 핵심 기능 구현을 담당, 실시간 음성 스트리밍 구현, iOS Safari 호환성 구현, 대화 컨텍스트 시스템(장기 기억) 구현,  VAD 음성 감지 최적화",
         bgColor:"#e8b547ff"
     }
@@ -135,6 +135,7 @@ export const Works = ({ scrollRootRef }: WorksProps) => {
        <div className="absolute top-0 left-[50%] flex flex-col justify-center"
        style={{transform:"translateX(-50%);"}}
        >
+        <h2 className="text-white text-4xl font-extrabold">WORKS</h2>
         {workData2.map((work, i) => (
           <div
             key={work.id}
