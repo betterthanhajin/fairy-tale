@@ -108,8 +108,8 @@ export const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
             
               return (
                 <div key={image.src}>
-                    <div className={`p-1 absolute top-[20%] left-[30%] z-40 bg-gradient-to-br from-[#EEAECA] via-[#C0B5DA] to-[#94BBE9] shadow-md rounded-md will-change-transform ${isActive ? 'opacity-100' : 'opacity-0'}`}>
-                        <h2 className="text-gray-600 font-extrabold lg:text-4xl text-xl">{image.title}<br/>{image.desc}</h2>
+                    <div className={`p-1 absolute top-[20%] left-[30%] z-40 bg-gradient-to-br from-[#EEAECA] via-[#C0B5DA] to-[#94BBE9] shadow-md rounded-3xl will-change-transform ${isActive ? 'opacity-100' : 'opacity-0'}`}>
+                        <h2 className="text-gray-600 font-extrabold lg:text-4xl text-xl p-2">{image.title}<br/>{image.desc}</h2>
                     </div>
                     <div
                     key={image.src}

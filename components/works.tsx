@@ -39,7 +39,7 @@ const workData2 = [
 
 const bgColorArr = [
   
-  ["#2ab1efff","#fa9b4eff"],
+  ["#2ab1efff","#f98220ff"],
   ["#d362ecff","#47e0e8ff"],
   ["#e67060ff","#8651e9ff"]
 ]
@@ -163,8 +163,8 @@ export const Works = ({ scrollRootRef }: WorksProps) => {
             <div key={desc} className="mt-2 lg:text-sm text-xs">{desc}</div>
             ))}
             <div className="lg:mt-12 mt-2">
-              <Image className="lg:block hidden" src={work.imageUrl || ""} alt="상세이미지" width={450} height={400}></Image>
-              <Image className="block lg:hidden" src={work.imageUrl || ""} alt="상세이미지" width={300} height={200}></Image>
+              <Image className="lg:block hidden" style={{borderRadius:"20px"}} src={work.imageUrl || ""} alt="상세이미지" width={450} height={400}></Image>
+              <Image className="block lg:hidden" style={{borderRadius:"20px"}} src={work.imageUrl || ""} alt="상세이미지" width={300} height={200}></Image>
             </div>
           </div>
        
