@@ -172,7 +172,7 @@ export const Works = ({ scrollRootRef }: WorksProps) => {
                 {/* 설명 */}
                 <div className="space-y-2 mb-6">
                   {work.desc.split(",").map((desc, idx) => (
-                    <p key={idx} className="text-sm lg:text-base text-gray-700 leading-relaxed">
+                    <p key={desc} className="text-sm lg:text-base text-gray-700 leading-relaxed">
                       • {desc.trim()}
                     </p>
                   ))}
