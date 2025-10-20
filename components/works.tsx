@@ -152,7 +152,7 @@ export const Works = ({ scrollRootRef }: WorksProps) => {
               transitionDelay: `${i * 100}ms`,
             }}
           >
-            <div className="lg:flex">
+            <div className="flex lg:flex-row flex-col">
               {/* 이미지 섹션 */}
               <div className="lg:w-1/2 relative h-64 lg:h-auto overflow-hidden bg-gray-100">
                 <Image
