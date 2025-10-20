@@ -54,7 +54,7 @@ export const Works = ({ scrollRootRef }: WorksProps) => {
 
   const isActive = useRevealOnEnter(sectionRef, {
     root: scrollRootRef?.current ?? null,
-    threshold: 0.25,
+    threshold: 0.1,
   });
 
   const introTransform = `translate(-300px, -700px) rotate(-30deg)`;
