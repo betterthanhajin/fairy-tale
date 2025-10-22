@@ -10,9 +10,7 @@ const workData2 = [
     desc: "기존 URL 공유 방식 대비 QR코드 스캔으로 접근 장벽 제거하여 사용 편의성 개선, 인스타그램/카카오톡 SNS api와 연동하여 챗봇의 편의성을 높임, 챗봇의 폰트/애니메이션테마/아이콘을 적용할수 있게 커스텀 기능 강화, 에디터 라이브러리를 적용하여 유저와 챗봇의 상호작용을 강화",
     bgColor: "#9ddbf8ff",
     imageUrl: "/image/works/image.png",
-    // 추가: 기술 스택
     techStack: ["React", "TypeScript", "Node.js", "Instagram API", "Kakao API"],
-    // 추가: 주요 성과
     highlights: ["QR코드 도입으로 접근성 40% 개선", "SNS 연동으로 사용자 편의성 향상", "커스텀 기능으로 만족도 증가"],
   },
   {
@@ -42,6 +40,24 @@ const workData2 = [
     techStack: ["NextJS", "Web Audio API", "WebSocket", "OpenAI API"],
     highlights: ["실시간 음성 스트리밍 구현", "iOS Safari 호환성 확보", "AI 대화 컨텍스트 시스템 개발"],
   },
+  {
+    id: 8,
+    title: "05. CGV 어시스턴트",
+    desc: "CGV 영화 실관람평 모니터링 및 분석 서비스로 AI 기반 감정 분석과 유해 콘텐츠 탐지를 통해 실시간 리뷰 관리 및 통계 리포트를 제공하는 대시보드 애플리케이션",
+    bgColor: "#fff1d3ff",
+    imageUrl: "/image/works/cgv-ass.png",
+    techStack: ["NextJS", "React", "Typescript", "Radix UI", "Recharts", "Supabase", "CloudFlare"],
+    highlights: ["레이더 차트 구현", "감정 및 매력포인트 분석 기능", "메모 작성/수정 기능", "트렌드 차트 목업", "키워드 데이터 시각화", "CGV 데이터 최신화", "스토리 스크래핑", "AI 키워드 추출", "매력포인트 및 감정포인트 분석 로직 개발", "JSON-to-TXT 변환 기능 구현 등 데이터 분석 및 처리 작업 수행"],
+  },
+  {
+    id: 9,
+    title: "06. 라미앱",
+    desc: "디바이스 AI 기술을 활용한 개인정보 보호 중심의 크로스플랫폼 AI 어시스턴트 모바일 앱. 모든 대화 이력과 AI 처리가 사용자 기기 내에서만 이루어지며 외부 서버로 데이터를 전송하지 않는 완전한 프라이버시 보장 솔루션",
+    bgColor: "#fff1d3ff",
+    imageUrl: "/image/works/235.png",
+    techStack: ["React Native", " Expo", "Typescript", "ONNX Runtime","Legend State"],
+    highlights: ["UI 디테일 및 사용자 경험 개선", "사이드바 인터랙션 개선", "세밀한 UI/UX 품질 향상 작업"],
+  },
 ];
 
 type WorksProps = {
@@ -51,6 +67,7 @@ type WorksProps = {
 export const Works = ({ scrollRootRef }: WorksProps) => {
   const sectionRef = useRef<HTMLElement | null>(null);
   const [hoveredId, setHoveredId] = useState<number | null>(null);
+  const [modalImage, setModalImage] = useState<{ url: string; title: string } | null>(null);
 
   const isActive = useRevealOnEnter(sectionRef, {
     root: scrollRootRef?.current ?? null,
@@ -120,95 +137,160 @@ export const Works = ({ scrollRootRef }: WorksProps) => {
     return () => remove(scroller);
   }, [scrollRootRef?.current]);
 
+  // 모달 닫기 핸들러
+  const closeModal = () => {
+    setModalImage(null);
+  };
+
+  // ESC 키로 모달 닫기
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    };
+
+    if (modalImage) {
+      document.addEventListener('keydown', handleEscape);
+      // 스크롤 방지
+      document.body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'unset';
+    };
+  }, [modalImage]);
+
   return (
-    <section
-      ref={sectionRef}
-      id="section-1"
-      className="relative z-10 lg:py-20 py-12 bg-gradient-to-b from-white to-gray-50"
-    >
-      {/* 개선된 타이틀 */}
-      <div className="text-center mb-16">
-        <h2 className="text-[#665444] text-5xl lg:text-6xl font-extrabold mb-4">WORKS</h2>
-        <p className="text-[#927650] text-lg lg:text-xl">프로젝트로 보는 성장 스토리</p>
-      </div>
+    <>
+      <section
+        ref={sectionRef}
+        id="section-1"
+        className="relative z-10 lg:py-20 py-12 bg-gradient-to-b from-white to-gray-50"
+      >
+        {/* 개선된 타이틀 */}
+        <div className="text-center mb-16">
+          <h2 className="text-[#665444] text-5xl lg:text-6xl font-extrabold mb-4">WORKS</h2>
+          <p className="text-[#927650] text-lg lg:text-xl">프로젝트로 보는 성장 스토리</p>
+        </div>
 
-      <div className="max-w-6xl mx-auto px-4 space-y-12">
-        {workData2.map((work, i) => (
-          <div
-            key={work.id}
-            id={`work-${work.id}`}
-            onMouseEnter={() => setHoveredId(work.id)}
-            onMouseLeave={() => setHoveredId(null)}
-            className={`
-              bg-white rounded-2xl shadow-lg overflow-hidden
-              transition-all duration-700 will-change-transform
-              hover:shadow-2xl hover:-translate-y-2
-              ${hoveredId === work.id ? 'scale-[1.02]' : 'scale-100'}
-            `}
-            style={{
-              visibility: isActive ? "visible" : "hidden",
-              opacity: isActive ? 1 : 0,
-              transform: isActive ? "none" : introTransform,
-              transitionDelay: `${i * 100}ms`,
-            }}
-          >
-            <div className="flex lg:flex-row flex-col">
-              {/* 이미지 섹션 */}
-              <div className="lg:w-1/2 relative h-64 lg:h-auto overflow-hidden bg-gray-100">
-                <Image
-                  src={work.imageUrl || ""}
-                  alt={work.title}
-                  fill
-                  className="object-cover transition-transform duration-500 hover:scale-110"
-                />
-              </div>
-
-              {/* 내용 섹션 */}
-              <div className="lg:w-1/2 p-6 lg:p-8">
-                <h3 className="text-2xl lg:text-3xl font-bold text-[#665444] mb-4">
-                  {work.title}
-                </h3>
-
-                {/* 설명 */}
-                <div className="space-y-2 mb-6">
-                  {work.desc.split(",").map((desc, idx) => (
-                    <p key={desc} className="text-sm lg:text-base text-gray-700 leading-relaxed">
-                      • {desc.trim()}
-                    </p>
-                  ))}
-                </div>
-
-                {/* 기술 스택 */}
-                <div className="mb-6">
-                  <h4 className="text-sm font-semibold text-[#927650] mb-2">🛠️ Tech Stack</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {work.techStack?.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-3 py-1 bg-[#d8c5b3]/30 text-[#665444] rounded-full text-xs lg:text-sm font-medium"
-                      >
-                        {tech}
-                      </span>
-                    ))}
+        <div className="max-w-6xl mx-auto px-4 space-y-12">
+          {workData2.map((work, i) => (
+            <div
+              key={work.id}
+              id={`work-${work.id}`}
+              onMouseEnter={() => setHoveredId(work.id)}
+              onMouseLeave={() => setHoveredId(null)}
+              className={`
+                bg-white rounded-2xl shadow-lg overflow-hidden
+                transition-all duration-700 will-change-transform
+                hover:shadow-2xl hover:-translate-y-2
+                ${hoveredId === work.id ? 'scale-[1.02]' : 'scale-100'}
+              `}
+              style={{
+                visibility: isActive ? "visible" : "hidden",
+                opacity: isActive ? 1 : 0,
+                transform: isActive ? "none" : introTransform,
+                transitionDelay: `${i * 100}ms`,
+              }}
+            >
+              <div className="flex lg:flex-row flex-col">
+                {/* 이미지 섹션 */}
+                <div 
+                  className="lg:w-1/2 relative h-64 lg:h-auto overflow-hidden bg-gray-100 cursor-pointer group" 
+                  onClick={() => setModalImage({ url: work.imageUrl, title: work.title })}
+                >
+                  <Image
+                    src={work.imageUrl || ""}
+                    alt={work.title}
+                    fill
+                    className="object-contain transition-transform duration-500 group-hover:scale-105"
+                  />
+                  {/* 확대 힌트 */}
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
+                    <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm bg-black/50 px-3 py-1 rounded">
+                      클릭하여 확대
+                    </span>
                   </div>
                 </div>
 
-                {/* 주요 성과 */}
-                <div>
-                  <h4 className="text-sm font-semibold text-[#927650] mb-2">🎯 Key Achievements</h4>
-                  <div className="space-y-1">
-                    {work.highlights?.map((highlight, idx) => (
-                      <p key={idx} className="text-xs lg:text-sm text-gray-600">
-                        ✓ {highlight}
+                {/* 내용 섹션 */}
+                <div className="lg:w-1/2 p-6 lg:p-8">
+                  <h3 className="text-2xl lg:text-3xl font-bold text-[#665444] mb-4">
+                    {work.title}
+                  </h3>
+
+                  {/* 설명 */}
+                  <div className="space-y-2 mb-6">
+                    {work.desc.split(",").map((desc, idx) => (
+                      <p key={idx} className="text-sm lg:text-base text-gray-700 leading-relaxed">
+                        • {desc.trim()}
                       </p>
                     ))}
+                  </div>
+
+                  {/* 기술 스택 */}
+                  <div className="mb-6">
+                    <h4 className="text-sm font-semibold text-[#927650] mb-2">🛠️ Tech Stack</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {work.techStack?.map((tech) => (
+                        <span
+                          key={tech}
+                          className="px-3 py-1 bg-[#d8c5b3]/30 text-[#665444] rounded-full text-xs lg:text-sm font-medium"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* 주요 성과 */}
+                  <div>
+                    <h4 className="text-sm font-semibold text-[#927650] mb-2">🎯 Key Achievements</h4>
+                    <div className="space-y-1">
+                      {work.highlights?.map((highlight, idx) => (
+                        <p key={idx} className="text-xs lg:text-sm text-gray-600">
+                          ✓ {highlight}
+                        </p>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 이미지 모달 */}
+      {modalImage && (
+        <div 
+          className="fixed inset-0 z-100 bg-black/90 flex items-center justify-center p-4"
+          onClick={closeModal}
+        >
+          <button
+            onClick={closeModal}
+            className="absolute top-4 right-4 text-white text-4xl hover:text-gray-300 transition-colors z-10 cursor-pointer"
+            aria-label="닫기"
+          >
+            ×
+          </button>
+          
+          <div 
+            className="relative w-full h-full max-w-6xl max-h-[90vh]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Image
+              src={modalImage.url}
+              alt={modalImage.title}
+              fill
+              className="object-contain"
+              quality={100}
+            />
           </div>
-        ))}
-      </div>
-    </section>
+        </div>
+      )}
+    </>
   );
 };
