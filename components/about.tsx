@@ -13,7 +13,7 @@ const aboutData = {
     "팀과 함께 성장하는 것을 중요하게 생각하며, 팀 전체의 생산성을 높이기 위해 노력합니다.",
     "새로운 기술을 두려워하지 않고, 여러 기술을 넘나들며 최적의 솔루션을 찾아갑니다.",
   ],
-  imageUrl: "/image/works/me.png",
+  imageUrl: "/image/works/me2.jpeg",
 };
 
 const skillsData = {
